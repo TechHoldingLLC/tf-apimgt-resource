@@ -1,9 +1,13 @@
 variable "name" {}
 variable "resource_group" {
-  default = { name = "" }
+  default = {
+    name = ""
+  }
 }
 variable "apimgt" {
-  default = { name = "" }
+  default = {
+    name = ""
+  }
 }
 variable "revision" {
   default = "1"
@@ -11,12 +15,21 @@ variable "revision" {
 variable "display_name" {}
 variable "path" {}
 variable "subscription_key_parameters" {
-  default = { header = "API-Key" query = "key" }
+  default = {
+    header = "API-Key"
+    query = "key"
+  }
 }
 variable "method_id" {}
 variable "method_name" {}
-variable "method" { default = "GET" }
-variable "url" { default = "/*"}
+variable "method" {
+  default = "GET"
+}
+variable "url" {
+  default = "/*"
+}
 variable "backend" {
-  default = { url = "" }
+  default = {
+    url = ""
+  }
 }
