@@ -17,7 +17,7 @@ variable "path" {}
 variable "subscription_key_parameters" {
   default = {
     header = "API-Key"
-    query = "key"
+    query  = "key"
   }
 }
 variable "method_id" {}
