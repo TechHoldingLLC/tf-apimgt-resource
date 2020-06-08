@@ -51,5 +51,5 @@ variable "backend" {
 }
 variable "products" {
   default = {}
-  type    = object({})
+  type = map(string)
 }
