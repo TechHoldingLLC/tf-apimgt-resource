@@ -17,7 +17,7 @@ variable "apimgt" {
 }
 variable "revision" {
   default = "1"
-  type = string
+  type    = string
 }
 variable "display_name" {}
 variable "path" {}
@@ -28,18 +28,18 @@ variable "subscription_key_parameters" {
   }
   type = object({
     header = string
-    query = string
+    query  = string
   })
 }
 variable "method_id" {}
 variable "method_name" {}
 variable "method" {
   default = "GET"
-  type = string
+  type    = string
 }
 variable "url" {
   default = "/*"
-  type = string
+  type    = string
 }
 variable "backend" {
   default = {
@@ -51,5 +51,5 @@ variable "backend" {
 }
 variable "products" {
   default = []
-  type = list(string)
+  type    = list(string)
 }
