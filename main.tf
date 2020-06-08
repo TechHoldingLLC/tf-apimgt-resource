@@ -40,3 +40,15 @@ resource "azurerm_api_management_api_operation_policy" "api" {
 </policies>
 XML
 }
+
+### PRODUCT
+
+
+resource "azurerm_api_management_product_api" "api" {
+  for_each = var.products
+
+  api_name            = azurerm_api_management_api.api.name
+  product_id          = each.value
+  api_management_name = var.apimgt.name
+  resource_group_name = var.resource_group.name
+}
