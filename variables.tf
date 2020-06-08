@@ -50,6 +50,6 @@ variable "backend" {
   })
 }
 variable "products" {
-  default = []
-  type    = list(string)
+  default = {}
+  type    = object({})
 }
