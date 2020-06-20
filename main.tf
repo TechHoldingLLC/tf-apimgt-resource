@@ -26,46 +26,46 @@ resource "azurerm_api_management_api" "api" {
   version_set_id = azurerm_api_management_api_version_set.api.id
 }
 
-resource "azurerm_api_management_api_operation" "api" {
-  for_each = local.routes
+# resource "azurerm_api_management_api_operation" "api" {
+#   for_each = local.routes
 
-  resource_group_name = var.rg
-  api_management_name = var.apim
+#   resource_group_name = var.rg
+#   api_management_name = var.apim
 
-  api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
-  operation_id = each.value.operation_id
-  display_name = each.value.display_name
-  method       = each.value.method
-  url_template = each.value.src
-}
+#   api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
+#   operation_id = each.value.operation_id
+#   display_name = each.value.display_name
+#   method       = each.value.method
+#   url_template = each.value.src
+# }
 
-resource "azurerm_api_management_api_operation_policy" "api" {
-  for_each = local.routes
+# resource "azurerm_api_management_api_operation_policy" "api" {
+#   for_each = local.routes
 
-  resource_group_name = var.rg
-  api_management_name = var.apim
+#   resource_group_name = var.rg
+#   api_management_name = var.apim
 
-  api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
-  operation_id = each.value.operation_id
+#   api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
+#   operation_id = each.value.operation_id
 
-  xml_content = <<XML
-<policies>
-  <inbound>
-    <set-backend-service base-url="${each.value.dst}" />
-  </inbound>
-  <backend>
-    <forward-request />
-  </backend>
-</policies>
-XML
-}
+#   xml_content = <<XML
+# <policies>
+#   <inbound>
+#     <set-backend-service base-url="${each.value.dst}" />
+#   </inbound>
+#   <backend>
+#     <forward-request />
+#   </backend>
+# </policies>
+# XML
+# }
 
-resource "azurerm_api_management_product_api" "api" {
-  for_each = local.products
+# resource "azurerm_api_management_product_api" "api" {
+#   for_each = local.products
 
-  resource_group_name = var.rg
-  api_management_name = var.apim
+#   resource_group_name = var.rg
+#   api_management_name = var.apim
 
-  api_name   = lookup(azurerm_api_management_api.api, each.value.version, "").name
-  product_id = each.value.product
-}
+#   api_name   = lookup(azurerm_api_management_api.api, each.value.version, "").name
+#   product_id = each.value.product
+# }
