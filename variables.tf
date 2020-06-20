@@ -1,55 +1,36 @@
 variable "name" {}
-variable "resource_group" {
-  default = {
-    name = ""
-  }
-  type = object({
-    name = string
-  })
+variable "rg" {
+  type = string
 }
-variable "apimgt" {
-  default = {
-    name = ""
-  }
-  type = object({
-    name = string
-  })
+variable "apim" {
+  type = string
+}
+variable "versioning_scheme" {
+  default = "Segment"
+  type    = string
 }
 variable "revision" {
   default = "1"
   type    = string
 }
-variable "display_name" {}
-variable "path" {}
-variable "subscription_key_parameters" {
-  default = {
-    header = "API-Key"
-    query  = "key"
-  }
-  type = object({
-    header = string
-    query  = string
-  })
+variable "display_name" {
+  type = string
 }
-variable "method_id" {}
-variable "method_name" {}
-variable "method" {
-  default = "GET"
-  type    = string
-}
-variable "url" {
-  default = "/*"
-  type    = string
-}
-variable "backend" {
-  default = {
-    url = ""
-  }
-  type = object({
-    url = string
-  })
-}
-variable "products" {
-  default = {}
-  type = map(string)
+
+variable "versions" {
+  type = map(object({
+    path = string
+    subscription_key_parameter_names = object({
+      header = string
+      query  = string
+    })
+    routes = list(object({
+      operation_id = string
+      display_name = string
+      method       = string
+      dst          = string
+      src          = string
+    }))
+    products = list(string)
+  }))
 }
