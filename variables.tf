@@ -7,7 +7,7 @@ variable "apim" {
 }
 variable "versioning_scheme" {
   default = "Segment"
-  type = string
+  type    = string
 }
 variable "revision" {
   default = "1"
@@ -27,9 +27,9 @@ variable "versions" {
     routes = list(object({
       operation_id = string
       display_name = string
-      method = string
-      dst = string
-      src = string
+      method       = string
+      dst          = string
+      src          = string
     }))
     products = list(string)
   }))
