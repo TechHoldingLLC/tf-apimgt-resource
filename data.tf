@@ -1,5 +1,5 @@
 locals {
-  routes = [for kv, v in var.versions :
+  routes = flatten([for kv, v in var.versions :
     [for r in v.routes : {
       version      = kv
       operation_id = r.operation_id
@@ -8,11 +8,11 @@ locals {
       dst          = r.dst
       src          = r.src
     }]
-  ]
-  products = [for kv, v in var.versions :
+  ])
+  products = flatten([for kv, v in var.versions :
     [for p in v.products : {
       version = kv
       product = p
     }]
-  ]
+  ])
 }

@@ -27,7 +27,7 @@ resource "azurerm_api_management_api" "api" {
 }
 
 # resource "azurerm_api_management_api_operation" "api" {
-#   for_each = tomap(local.routes)
+#   for_each = local.routes
 
 #   resource_group_name = var.rg
 #   api_management_name = var.apim
@@ -40,7 +40,7 @@ resource "azurerm_api_management_api" "api" {
 # }
 
 # resource "azurerm_api_management_api_operation_policy" "api" {
-#   for_each = tomap(local.routes)
+#   for_each = local.routes
 
 #   resource_group_name = var.rg
 #   api_management_name = var.apim
@@ -61,7 +61,7 @@ resource "azurerm_api_management_api" "api" {
 # }
 
 # resource "azurerm_api_management_product_api" "api" {
-#   for_each = tomap(local.products)
+#   for_each = local.products
 
 #   resource_group_name = var.rg
 #   api_management_name = var.apim
