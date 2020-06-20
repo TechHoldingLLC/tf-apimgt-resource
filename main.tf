@@ -46,7 +46,7 @@ resource "azurerm_api_management_api_operation_policy" "api" {
   api_management_name = var.apim
 
   api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
-  operation_id = each.value.operation_id
+  operation_id = lookup(azurerm_api_management_api_operation.api, each.key, "").operation_id
 
   xml_content = <<XML
 <policies>
