@@ -17,7 +17,7 @@ variable "display_name" {
   type = string
 }
 variable "subscription_required" {
-  type = bool
+  type    = bool
   default = false
 }
 
