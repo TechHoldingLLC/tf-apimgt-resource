@@ -17,6 +17,7 @@ resource "azurerm_api_management_api" "api" {
   path                = each.value.path
   protocols           = ["https"]
 
+  subscription_required = var.subscription_required
   subscription_key_parameter_names {
     header = each.value.subscription_key_parameter_names.header
     query  = each.value.subscription_key_parameter_names.query

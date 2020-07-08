@@ -16,6 +16,10 @@ variable "revision" {
 variable "display_name" {
   type = string
 }
+variable "subscription_required" {
+  type = bool
+  default = false
+}
 
 variable "versions" {
   type = map(object({
