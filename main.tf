@@ -68,6 +68,7 @@ resource "azurerm_api_management_api_operation" "api" {
 
 resource "azurerm_api_management_api_operation_policy" "api" {
   for_each = local.routes
+  count    = each.value.policy ? 1 : 0
 
   resource_group_name = var.rg
   api_management_name = var.apim

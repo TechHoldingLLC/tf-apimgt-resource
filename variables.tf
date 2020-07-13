@@ -35,7 +35,7 @@ variable "versions" {
       operation_id = string
       display_name = string
       method       = string
-      policy       = object({})
+      policy       = any
       src          = string
     }))
     products = list(string)
