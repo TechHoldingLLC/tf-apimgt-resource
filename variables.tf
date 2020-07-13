@@ -21,6 +21,8 @@ variable "subscription_required" {
   default = false
 }
 
+variable "policy" {}
+
 variable "versions" {
   type = map(object({
     path = string
@@ -28,11 +30,12 @@ variable "versions" {
       header = string
       query  = string
     })
+    policy = object({})
     routes = list(object({
       operation_id = string
       display_name = string
       method       = string
-      dst          = string
+      policy       = object({})
       src          = string
     }))
     products = list(string)

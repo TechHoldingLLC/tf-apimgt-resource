@@ -27,6 +27,32 @@ resource "azurerm_api_management_api" "api" {
   version_set_id = azurerm_api_management_api_version_set.api.id
 }
 
+resource "azurerm_api_management_api_policy" "api" {
+  for_each = var.versions
+  count    = each.value.policy ? 1 : 0
+
+  api_name            = "${var.name}-${each.key}"
+  api_management_name = var.apim
+  resource_group_name = var.rf
+
+  xml_content = <<XML
+<policies>
+  <inbound>
+    ${each.value.policy.inbound ? each.value.policy.inbound : ""}
+  </inbound>
+  <backend>
+    ${each.value.policy.backend ? each.value.policy.backend : ""}
+  </backend>
+  <outbound>
+    ${each.value.policy.outbound ? each.value.policy.outbound : ""}
+  </outbound>
+  <on-error>
+    ${each.value.policy.on_error ? each.value.policy.on_error : ""}
+  </on-error>
+</policies>
+XML
+}
+
 resource "azurerm_api_management_api_operation" "api" {
   for_each = local.routes
 
@@ -52,11 +78,17 @@ resource "azurerm_api_management_api_operation_policy" "api" {
   xml_content = <<XML
 <policies>
   <inbound>
-    <set-backend-service base-url="${each.value.dst}" />
+    ${each.value.policy.inbound ? each.value.policy.inbound : ""}
   </inbound>
   <backend>
-    <forward-request />
+    ${each.value.policy.backend ? each.value.policy.backend : ""}
   </backend>
+  <outbound>
+    ${each.value.policy.outbound ? each.value.policy.outbound : ""}
+  </outbound>
+  <on-error>
+    ${each.value.policy.on_error ? each.value.policy.on_error : ""}
+  </on-error>
 </policies>
 XML
 }
