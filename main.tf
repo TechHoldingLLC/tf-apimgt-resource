@@ -37,16 +37,16 @@ resource "azurerm_api_management_api_policy" "api" {
   xml_content = <<XML
 <policies>
   <inbound>
-    ${lookup(each.value, "inbound", false) ? each.value.inbound : ""}
+    ${lookup(each.value, "inbound", false) != false ? each.value.inbound : ""}
   </inbound>
   <backend>
-    ${lookup(each.value, "backend", false) ? each.value.backend : ""}
+    ${lookup(each.value, "backend", false) != false ? each.value.backend : ""}
   </backend>
   <outbound>
-    ${lookup(each.value, "outbound", false) ? each.value.outbound : ""}
+    ${lookup(each.value, "outbound", false) != false ? each.value.outbound : ""}
   </outbound>
   <on-error>
-    ${lookup(each.value, "on_error", false) ? each.value.on_error : ""}
+    ${lookup(each.value, "on_error", false) != false ? each.value.on_error : ""}
   </on-error>
 </policies>
 XML
@@ -77,16 +77,16 @@ resource "azurerm_api_management_api_operation_policy" "api" {
   xml_content = <<XML
 <policies>
   <inbound>
-    ${lookup(each.value.policy, "inbound", false) ? each.value.policy.inbound : ""}
+    ${lookup(each.value.policy, "inbound", false) != false ? each.value.policy.inbound : ""}
   </inbound>
   <backend>
-    ${lookup(each.value.policy, "backend", false) ? each.value.policy.backend : ""}
+    ${lookup(each.value.policy, "backend", false) != false ? each.value.policy.backend : ""}
   </backend>
   <outbound>
-    ${lookup(each.value.policy, "outbound", false) ? each.value.policy.outbound : ""}
+    ${lookup(each.value.policy, "outbound", false) != false ? each.value.policy.outbound : ""}
   </outbound>
   <on-error>
-    ${lookup(each.value.policy, "on_error", false) ? each.value.policy.on_error : ""}
+    ${lookup(each.value.policy, "on_error", false) != false ? each.value.policy.on_error : ""}
   </on-error>
 </policies>
 XML
