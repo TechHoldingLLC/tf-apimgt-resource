@@ -16,7 +16,7 @@ locals {
     }]
   ])
   versions_policy = {
-    for k, v in var.versions : "${k}" => v.policy if lookup(v, "policy", false)
+    for k, v in var.versions : "${k}" => v
   }
   routes = {
     for r in local.list_routes : "${r.version}-${r.operation_id}" => r
