@@ -5,7 +5,7 @@ locals {
       operation_id = r.operation_id
       display_name = r.display_name
       method       = r.method
-      policy       = lookup(r, "policy", false) ? r.policy : null
+      policy       = lookup(r, "policy", false) ? r.policy : false
       src          = r.src
     }]
   ])
