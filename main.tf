@@ -27,6 +27,31 @@ resource "azurerm_api_management_api" "api" {
   version_set_id = azurerm_api_management_api_version_set.api.id
 }
 
+resource "azurerm_api_management_api_policy" "api" {
+  for_each = local.versions_policy
+
+  api_name            = "${var.name}-${each.key}"
+  api_management_name = var.apim
+  resource_group_name = var.rg
+
+  xml_content = <<XML
+<policies>
+  <inbound>
+    ${lookup(each.value, "inbound", false) != false ? each.value.inbound : ""}
+  </inbound>
+  <backend>
+    ${lookup(each.value, "backend", false) != false ? each.value.backend : ""}
+  </backend>
+  <outbound>
+    ${lookup(each.value, "outbound", false) != false ? each.value.outbound : ""}
+  </outbound>
+  <on-error>
+    ${lookup(each.value, "on_error", false) != false ? each.value.on_error : ""}
+  </on-error>
+</policies>
+XML
+}
+
 resource "azurerm_api_management_api_operation" "api" {
   for_each = local.routes
 
@@ -41,7 +66,7 @@ resource "azurerm_api_management_api_operation" "api" {
 }
 
 resource "azurerm_api_management_api_operation_policy" "api" {
-  for_each = local.routes
+  for_each = local.routes_policy
 
   resource_group_name = var.rg
   api_management_name = var.apim
@@ -52,11 +77,17 @@ resource "azurerm_api_management_api_operation_policy" "api" {
   xml_content = <<XML
 <policies>
   <inbound>
-    <set-backend-service base-url="${each.value.dst}" />
+    ${lookup(each.value.policy, "inbound", false) != false ? each.value.policy.inbound : ""}
   </inbound>
   <backend>
-    <forward-request />
+    ${lookup(each.value.policy, "backend", false) != false ? each.value.policy.backend : ""}
   </backend>
+  <outbound>
+    ${lookup(each.value.policy, "outbound", false) != false ? each.value.policy.outbound : ""}
+  </outbound>
+  <on-error>
+    ${lookup(each.value.policy, "on_error", false) != false ? each.value.policy.on_error : ""}
+  </on-error>
 </policies>
 XML
 }

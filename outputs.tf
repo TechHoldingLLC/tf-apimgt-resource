@@ -9,3 +9,11 @@ output "routes" {
 output "products" {
   value = local.products
 }
+
+output "versions_policy" {
+  value = local.versions_policy
+}
+
+output "routes_policy" {
+  value = local.routes_policy
+}
