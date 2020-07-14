@@ -5,7 +5,7 @@ locals {
       operation_id = r.operation_id
       display_name = r.display_name
       method       = r.method
-      dst          = r.dst
+      policy       = r.policy ? r.policy : null
       src          = r.src
     }]
   ])
