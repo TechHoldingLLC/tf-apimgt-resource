@@ -32,7 +32,7 @@ resource "azurerm_api_management_api_policy" "api" {
 
   api_name            = "${var.name}-${each.key}"
   api_management_name = var.apim
-  resource_group_name = var.rf
+  resource_group_name = var.rg
 
   xml_content = <<XML
 <policies>
