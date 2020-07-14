@@ -21,8 +21,6 @@ variable "subscription_required" {
   default = false
 }
 
-variable "policy" {}
-
 variable "versions" {
   type = map(object({
     path = string

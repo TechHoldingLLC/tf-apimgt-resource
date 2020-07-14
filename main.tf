@@ -28,8 +28,7 @@ resource "azurerm_api_management_api" "api" {
 }
 
 resource "azurerm_api_management_api_policy" "api" {
-  for_each = var.versions
-  count    = each.value.policy ? 1 : 0
+  for_each = local.versions_policy
 
   api_name            = "${var.name}-${each.key}"
   api_management_name = var.apim
@@ -67,8 +66,7 @@ resource "azurerm_api_management_api_operation" "api" {
 }
 
 resource "azurerm_api_management_api_operation_policy" "api" {
-  for_each = local.routes
-  count    = each.value.policy ? 1 : 0
+  for_each = local.routes_policy
 
   resource_group_name = var.rg
   api_management_name = var.apim
