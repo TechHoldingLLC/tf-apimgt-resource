@@ -37,16 +37,16 @@ resource "azurerm_api_management_api_policy" "api" {
   xml_content = <<XML
 <policies>
   <inbound>
-    ${each.value.policy.inbound ? each.value.policy.inbound : ""}
+    ${each.value.inbound ? each.value.inbound : ""}
   </inbound>
   <backend>
-    ${each.value.policy.backend ? each.value.policy.backend : ""}
+    ${each.value.backend ? each.value.backend : ""}
   </backend>
   <outbound>
-    ${each.value.policy.outbound ? each.value.policy.outbound : ""}
+    ${each.value.outbound ? each.value.outbound : ""}
   </outbound>
   <on-error>
-    ${each.value.policy.on_error ? each.value.policy.on_error : ""}
+    ${each.value.on_error ? each.value.on_error : ""}
   </on-error>
 </policies>
 XML
