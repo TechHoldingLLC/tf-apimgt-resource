@@ -27,30 +27,30 @@ resource "azurerm_api_management_api" "api" {
   version_set_id = azurerm_api_management_api_version_set.api.id
 }
 
-# resource "azurerm_api_management_api_policy" "api" {
-#   for_each = local.versions_policy
+resource "azurerm_api_management_api_policy" "api" {
+  for_each = local.versions_policy
 
-#   api_name            = "${var.name}-${each.key}"
-#   api_management_name = var.apim
-#   resource_group_name = var.rg
+  api_name            = "${var.name}-${each.key}"
+  api_management_name = var.apim
+  resource_group_name = var.rg
 
-#   xml_content = <<XML
-# <policies>
-#   <inbound>
-#     ${each.value.inbound ? each.value.inbound : ""}
-#   </inbound>
-#   <backend>
-#     ${each.value.backend ? each.value.backend : ""}
-#   </backend>
-#   <outbound>
-#     ${each.value.outbound ? each.value.outbound : ""}
-#   </outbound>
-#   <on-error>
-#     ${each.value.on_error ? each.value.on_error : ""}
-#   </on-error>
-# </policies>
-# XML
-# }
+  xml_content = <<XML
+<policies>
+  <inbound>
+    ${each.value.inbound ? each.value.inbound : ""}
+  </inbound>
+  <backend>
+    ${each.value.backend ? each.value.backend : ""}
+  </backend>
+  <outbound>
+    ${each.value.outbound ? each.value.outbound : ""}
+  </outbound>
+  <on-error>
+    ${each.value.on_error ? each.value.on_error : ""}
+  </on-error>
+</policies>
+XML
+}
 
 resource "azurerm_api_management_api_operation" "api" {
   for_each = local.routes
