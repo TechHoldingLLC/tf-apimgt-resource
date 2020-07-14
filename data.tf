@@ -15,7 +15,7 @@ locals {
       product = p
     }]
   ])
-  version_policy = {
+  versions_policy = {
     for v in var.versions : "${v.version}" => v.policy
   }
   routes = {
