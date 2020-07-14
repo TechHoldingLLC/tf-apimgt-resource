@@ -22,7 +22,7 @@ locals {
     for r in local.list_routes : "${r.version}-${r.operation_id}" => r
   }
   routes_policy = {
-    for r in local.list_routes: "${r.version}-${r.operation_id}" => r if lookup(r.version, "policy", false)
+    for r in local.list_routes: "${r.version}-${r.operation_id}" => r if lookup(r, "policy", false)
   }
   products = {
     for p in local.list_products : "${p.version}-${p.product}" => p
