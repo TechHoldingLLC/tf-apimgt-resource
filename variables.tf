@@ -28,10 +28,12 @@ variable "versions" {
       header = string
       query  = string
     })
+    policy = any
     routes = list(object({
       operation_id = string
       display_name = string
       method       = string
+      policy       = any
       src          = string
     }))
     products = list(string)
