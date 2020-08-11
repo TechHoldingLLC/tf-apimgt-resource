@@ -58,7 +58,7 @@ resource "azurerm_api_management_api_operation" "api" {
   resource_group_name = var.rg
   api_management_name = var.apim
 
-  api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
+  api_name     = lookup(azurerm_api_management_api.api, each.value.version, { name = "" }).name
   operation_id = each.value.operation_id
   display_name = each.value.display_name
   method       = each.value.method
