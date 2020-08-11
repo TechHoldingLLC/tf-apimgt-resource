@@ -71,8 +71,8 @@ resource "azurerm_api_management_api_operation_policy" "api" {
   resource_group_name = var.rg
   api_management_name = var.apim
 
-  api_name     = lookup(azurerm_api_management_api.api, each.value.version, "").name
-  operation_id = lookup(azurerm_api_management_api_operation.api, each.key, "").operation_id
+  api_name     = lookup(azurerm_api_management_api.api, each.value.version, { name = "" }).name
+  operation_id = lookup(azurerm_api_management_api_operation.api, each.key, { operation_id = "" }).operation_id
 
   xml_content = <<XML
 <policies>
@@ -98,6 +98,6 @@ resource "azurerm_api_management_product_api" "api" {
   resource_group_name = var.rg
   api_management_name = var.apim
 
-  api_name   = lookup(azurerm_api_management_api.api, each.value.version, "").name
+  api_name   = lookup(azurerm_api_management_api.api, each.value.version, { name = "" }).name
   product_id = each.value.product
 }
